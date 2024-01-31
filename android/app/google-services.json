@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "60224760958",
+    "project_id": "cloud-voiture-c07a9",
+    "storage_bucket": "cloud-voiture-c07a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60224760958:android:d689b22c30485f5aee7c2f",
+        "android_client_info": {
+          "package_name": "com.cloud.voiture"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjOuX79vv0xLAz6L0ISlcEVZkdEMEsWbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

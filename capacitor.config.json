@@ -1,0 +1,6 @@
+{
+    "appId": "com.cloud.voiture",
+    "appName": "Voiture",
+    "bundledWebRuntime": false,
+    "webDir": "www"
+}

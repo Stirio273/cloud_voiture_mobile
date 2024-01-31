@@ -1,0 +1,29 @@
+.field {
+    margin-bottom: 1rem !important;
+}
+
+.ion-label {
+    padding-left: 0.2rem;
+    padding-right: 0.5rem;
+    color: #834e76;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+.error-message {
+    color: rgb(236, 149, 35);
+    margin: 0;
+}
+
+.customInput {
+    /* --background: #e1d5e7; */
+    --padding-bottom: 1rem;
+    --padding-top: 1rem;
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+    border-radius: 10px;
+    margin-top: 0.25rem;
+    transition: all 0.2s linear;
+}

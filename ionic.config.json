@@ -1,0 +1,7 @@
+{
+  "name": "Milavam",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

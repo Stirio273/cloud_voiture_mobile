@@ -1,0 +1,20 @@
+.layout-toolbar {
+    background: #35424a;
+    /* color: white; */
+}
+
+.layout-title {
+    font-size: 1.5rem;
+}
+
+.car-icon {
+    margin-right: 8px;
+}
+
+.notification-button {
+    color: #35424a;
+}
+
+.layout-content {
+    padding: 16px;
+}

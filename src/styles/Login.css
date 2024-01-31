@@ -1,0 +1,29 @@
+.loginPage {
+    background-color: #e1d5e7;
+}
+
+.loginPage .ion-toolbar {
+    --border-style: none;
+    --border-color: transparent;
+    --padding-top: 1rem;
+    --padding-bottom: 1rem;
+    --padding-start: 1rem;
+    --padding-end: 1rem;
+    background-color: #834e76;
+    color: #fff;
+}
+
+.headingText {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.headingText h5 {
+    margin-top: 0.2rem;
+    color: #d3a6c7;
+}
+
+.ion-footer {
+    background-color: #834e76;
+    color: #fff;
+}

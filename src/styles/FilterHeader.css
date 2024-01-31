@@ -1,0 +1,21 @@
+/* FilterHeader.css */
+
+#stickyHeader {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    /* Ensure it appears above other content */
+}
+
+.searchFormHeader {
+    /* Add any additional styling as needed */
+}
+
+.header-filter {
+    display: flex;
+    align-items: center;
+}
+
+.header-filter__title {
+    margin-left: 8px;
+}

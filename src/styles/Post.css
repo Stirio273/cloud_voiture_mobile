@@ -1,0 +1,52 @@
+/* Post.css */
+
+.post-author-avatar {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    /* Utilisez 50% pour obtenir un cercle parfait */
+}
+
+.post-title {
+    font-size: 1.6rem;
+    /* Augmentez légèrement la taille de la police */
+    margin-top: 1rem;
+    /* Augmentez la marge supérieure */
+}
+
+.post-card {
+    font-size: 14px;
+    margin: 8px;
+    border-radius: 10px;
+    /* Ajoutez une bordure arrondie à la carte */
+    overflow: hidden;
+    /* Assurez-vous que le contenu ne dépasse pas la bordure arrondie */
+}
+
+.post-content {
+    padding: 8px;
+}
+
+.post-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* Utilisez align-items pour aligner verticalement les éléments du pied de page */
+    width: 100%;
+    border-top: 1px solid rgb(220, 220, 220);
+    /* Légèrement plus clair pour la bordure supérieure */
+    margin-top: 1.5rem;
+    /* Réduisez légèrement la marge supérieure */
+    padding-top: 1rem;
+}
+
+.post-category {
+    margin-top: 1rem;
+}
+
+.post-image {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    /* Ajoutez une bordure arrondie uniquement en haut */
+}

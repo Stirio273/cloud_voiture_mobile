@@ -1,0 +1,166 @@
+/* Ajoutez ces styles dans votre fichier Menu.css */
+
+.user-name-background {
+  background-color: #003366;
+  /* This is a shade of dark blue */
+  padding: 10px;
+  /* Adjust this value to your liking */
+  border-radius: 5px;
+  /* Adjust this value to your liking */
+  color: white;
+  /* Change the text color to white */
+}
+
+ion-menu ion-content {
+  --background: #051622;
+  /* Change the background color to a light blue */
+}
+
+ion-menu.md ion-content {
+  --padding-start: 20px;
+  /* Increase the padding */
+  --padding-end: 20px;
+  /* Increase the padding */
+  --padding-top: 24px;
+  /* Increase the padding */
+  --padding-bottom: 24px;
+  /* Increase the padding */
+}
+
+ion-menu.md ion-list {
+  padding: 24px 0;
+  /* Increase the padding */
+}
+
+ion-menu.md ion-note {
+  margin-bottom: 24px;
+  /* Increase the margin */
+}
+
+ion-menu.md ion-list-header,
+ion-menu.md ion-note {
+  padding-left: 20px;
+  /* Increase the padding */
+}
+
+ion-menu.md ion-list#inbox-list {
+  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
+}
+
+ion-menu.md ion-list#inbox-list ion-list-header {
+  font-size: 28px;
+  /* Increase the font size */
+  font-weight: 700;
+  /* Make the text bolder */
+  min-height: 28px;
+}
+
+ion-menu.md ion-list#labels-list ion-list-header {
+  font-size: 24px;
+  /* Decrease the font size */
+  margin-bottom: 24px;
+  /* Increase the margin */
+  color: #333;
+  /* Change the text color to dark gray */
+  min-height: 32px;
+  /* Increase the minimum height */
+}
+
+ion-menu.md ion-item {
+  --padding-start: 20px;
+  /* Increase the padding */
+  --padding-end: 20px;
+  /* Increase the padding */
+  border-radius: 10px;
+  /* Increase the border radius */
+  transition: background-color 0.3s ease-in-out;
+}
+
+ion-menu.md ion-item:hover {
+  --background: rgba(var(--ion-color-primary-rgb), 0.1);
+}
+
+ion-menu.md ion-item.selected {
+  --background: rgba(var(--ion-color-primary-rgb), 0.2);
+}
+
+ion-menu.md ion-item.selected ion-icon {
+  color: var(--ion-color-primary);
+}
+
+ion-menu.md ion-item ion-icon {
+  color: #333;
+  /* Change the icon color to dark gray */
+  font-size: 28px;
+  /* Increase the font size */
+  margin-right: 10px;
+  /* Increase the margin */
+}
+
+ion-menu.md ion-item ion-label {
+  font-weight: 600;
+  /* Make the text bolder */
+}
+
+/* Add other styles according to your specific needs */
+
+
+ion-menu.ios ion-content {
+  --padding-bottom: 20px;
+}
+
+ion-menu.ios ion-list {
+  padding: 20px 0 0 0;
+}
+
+ion-menu.ios ion-note {
+  line-height: 24px;
+  margin-bottom: 16px;
+}
+
+ion-menu.ios ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 50px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+ion-menu.ios ion-item:hover {
+  --background: rgba(var(--ion-color-primary-rgb), 0.1);
+}
+
+ion-menu.ios ion-item ion-icon {
+  font-size: 24px;
+  color: #73849a;
+  margin-right: 8px;
+}
+
+ion-menu.ios ion-item .selected ion-icon {
+  color: var(--ion-color-primary);
+}
+
+ion-menu.ios ion-list#labels-list ion-list-header {
+  margin-bottom: 12px;
+}
+
+ion-menu.ios ion-list-header,
+ion-menu.ios ion-note {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+ion-menu.ios ion-note {
+  margin-bottom: 12px;
+}
+
+ion-note {
+  display: block;
+  font-size: 16px;
+  color: var(--ion-color-medium-shade);
+}
+
+ion-item.selected {
+  --color: var(--ion-color-primary);
+}
+
+/* Ajoutez d'autres styles selon vos besoins spécifiques */
