@@ -8,18 +8,55 @@ import Wave from '../components/Wave';
 import { validateForm } from '../data/utils';
 import { useParams } from 'react-router';
 import '../styles/Signup.css';
+import api from '../services/api';
+import { IonSpinner } from '@ionic/react';
+import { Toast } from '@capacitor/toast';
+
+interface SignupFormData {
+    [key: string]: any;
+}
 
 const Signup: React.FC = () => {
     const params = useParams();
     const fields = useSignupFields();
     const [errors, setErrors] = useState<{ id: string; message: string }[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const createAccount = () => {
+    const showToast = async (msg: string) => {
+        await Toast.show({
+            text: msg
+        })
+    }
+
+    const createAccount = async () => {
         const formErrors = validateForm(fields);
         setErrors(formErrors);
 
         if (!formErrors.length) {
-            // Soumettez votre formulaire ici
+            const formData :  SignupFormData = {};
+            fields.forEach(field => {
+                formData[field.id] = field.input.state.value;
+            });
+            formData['actif'] = 1;
+            
+            setIsLoading(true);
+
+            try {
+                const response = await api.post('/utilisateur/inscription', formData);
+                const authToken = response.data.token;
+
+                showToast('Signup successfull,please log now');
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                window.location.href = '/signin';
+
+                
+            } catch (error) {
+                console.log(error);
+                showToast('Error during login');
+            } finally {
+                setIsLoading(false);
+            }
         }
     }
 
@@ -44,7 +81,7 @@ const Signup: React.FC = () => {
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
-            <IonContent fullscreen className='ion-content'>
+            <IonContent fullscreen>
                 <IonGrid className="ion-padding">
                     <IonCol size="12" className="headingText">
                         <IonCardTitle>Inscription</IonCardTitle>
@@ -55,8 +92,12 @@ const Signup: React.FC = () => {
                         {fields.map(field => (
                             <CustomField key={field.id} field={field} errors={errors} />
                         ))}
-                        <IonButton className="custom-button" expand="block" onClick={createAccount}>
-                            Créer un compte
+                        <IonButton className="custom-button" expand="block" onClick={createAccount} disabled={isLoading}>
+                                {isLoading ? (
+                                    <IonSpinner name="crescent" color="light" />
+                                ) : (
+                                    'Créer un compte'
+                                )}
                         </IonButton>
                     </IonCol>
                 </IonGrid>

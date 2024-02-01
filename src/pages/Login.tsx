@@ -11,9 +11,19 @@ import Action from '../components/Action';
 import Wave from '../components/Wave';
 import { PushNotifications, PushNotificationSchema, ActionPerformed, RegistrationError } from '@capacitor/push-notifications';
 import { Toast } from '@capacitor/toast';
+import api from '../services/api';
+import { IonSpinner } from '@ionic/react';
 
+
+
+interface LoginFormData {
+    [key: string]: string;
+}
 
 const Login: React.FC = () => {
+
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         // Register for push notifications
         PushNotifications.checkPermissions().then(result => {
@@ -89,15 +99,36 @@ const Login: React.FC = () => {
 
     const params = useParams();
     const fields = useLoginFields();
-    console.log(fields);
+    // console.log(fields);
     const [errors, setErrors] = useState<{ id: string; message: string }[]>([]);
 
-    const login = () => {
+    const login = async () => {
         const formErrors = validateForm(fields);
         setErrors(formErrors);
 
         if (!formErrors.length) {
-            // Submit your form here
+            const formData :  LoginFormData = {};
+            fields.forEach(field => {
+                formData[field.id] = field.input.state.value;
+                // console.log(formData[field.id]);
+            });
+
+            setIsLoading(true);
+            // console.log(formData);
+
+            try {
+                const response = await api.post('/rest/auth/login', formData);
+                const authToken = response.data.token;
+
+                localStorage.setItem('authToken', authToken);
+                window.location.href = '/home';
+
+                
+            } catch (error) {
+                showToast('Error during login');
+            } finally {
+                setIsLoading(false);
+            }
         }
     };
 
@@ -141,7 +172,13 @@ const Login: React.FC = () => {
                                 return <CustomField key={field.id} field={field} errors={errors} />;
                             })}
 
-                            <IonButton className="custom-button" expand="block" onClick={login}>Se connecter</IonButton>
+                            <IonButton className="custom-button" expand="block" onClick={login} disabled={isLoading}>
+                                {isLoading ? (
+                                    <IonSpinner name="crescent" color="light" />
+                                ) : (
+                                    'Se connecter'
+                                )}
+                            </IonButton>
                         </IonCol>
                     </IonRow>
                 </IonGrid>

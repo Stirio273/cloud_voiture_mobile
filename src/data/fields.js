@@ -3,7 +3,7 @@ import { useFormInput } from "./utils";
 export const useSignupFields = () => {
   return [
     {
-      id: "name",
+      id: "nom",
       label: "Nom",
       required: true,
       input: {
@@ -15,7 +15,7 @@ export const useSignupFields = () => {
       },
     },
     {
-      id: "firstName",
+      id: "prenom",
       label: "Prenom",
       required: true,
       input: {
@@ -51,7 +51,7 @@ export const useSignupFields = () => {
       },
     },
     {
-      id: "password",
+      id: "mdp",
       label: "Mot de passe",
       required: true,
       input: {
