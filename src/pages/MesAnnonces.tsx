@@ -22,10 +22,11 @@ import CarFilterBar from "../components/CarFilterBar";
 import PaginationComponent from "../components/PaginationComponent";
 import api from "../services/api";
 import { IonSpinner } from "@ionic/react";
+import MonAnnonce from "../components/MonAnnonce";
 
 const ITEMS_PER_PAGE = 2;
 
-const Home: React.FC = () => {
+const MesAnnonces: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterBy, setFilterBy] = useState(""); // Ajouter le filtre par défaut
   const [sortBy, setSortBy] = useState(""); // Ajouter le tri par défaut
@@ -36,7 +37,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const responseMarque = await api.get("/user/annonce/accueil");
+        const responseMarque = await api.get("/user/annonce/mesannonces");
         console.log(responseMarque.data.data);
         setAnnonces(responseMarque.data.data);
         setLoading(false);
@@ -90,21 +91,21 @@ const Home: React.FC = () => {
       <IonHeader collapse="condense">
         <IonToolbar>
           <IonTitle size="large" className="medium-title">
-            Ventes de Voitures
+          Mes annonces
           </IonTitle>
         </IonToolbar>
       </IonHeader>
 
       {loading && <IonSpinner name="crescent" color="light" />}
       {!loading && (
+        
         <IonContent>
           <CarFilterBar />
-
           <IonGrid>
             <IonRow>
               {visibleAnnonces.map((annonce, index) => (
                 <IonCol size="12" size-md="6" key={`carPost_${index}`}>
-                  <Post annonce={annonce} key={`carPost_${index}`}  afficherStatus={false}/>
+                  <MonAnnonce annonce={annonce} key={`carPost_${index}`} afficherStatus={true}/>
                 </IonCol>
               ))}
             </IonRow>
@@ -122,4 +123,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default MesAnnonces;

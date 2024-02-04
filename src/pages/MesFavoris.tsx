@@ -25,7 +25,7 @@ import { IonSpinner } from "@ionic/react";
 
 const ITEMS_PER_PAGE = 2;
 
-const Home: React.FC = () => {
+const MesFavoris: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterBy, setFilterBy] = useState(""); // Ajouter le filtre par défaut
   const [sortBy, setSortBy] = useState(""); // Ajouter le tri par défaut
@@ -36,7 +36,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const responseMarque = await api.get("/user/annonce/accueil");
+        const responseMarque = await api.get("/user/annonce/favoris");
         console.log(responseMarque.data.data);
         setAnnonces(responseMarque.data.data);
         setLoading(false);
@@ -104,7 +104,7 @@ const Home: React.FC = () => {
             <IonRow>
               {visibleAnnonces.map((annonce, index) => (
                 <IonCol size="12" size-md="6" key={`carPost_${index}`}>
-                  <Post annonce={annonce} key={`carPost_${index}`}  afficherStatus={false}/>
+                  <Post annonce={annonce} key={`carPost_${index}`} afficherStatus={true}/>
                 </IonCol>
               ))}
             </IonRow>
@@ -122,4 +122,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default MesFavoris;

@@ -22,7 +22,7 @@ import {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import '@ionic/react/css/ionic-swiper.css';
-import { bookmarkOutline, shareOutline,arrowBackOutline } from 'ionicons/icons';
+import { trashBin } from 'ionicons/icons';
 import { useHistory, useParams } from 'react-router';
 import '../styles/CarPost.css';
 import { useState ,useEffect } from "react";
@@ -31,14 +31,16 @@ import { IonSpinner } from "@ionic/react";
 import { Photo } from '../services/interface';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Link } from 'react-router-dom';
 
-const CarPost: React.FC = () => {
+const DetailMonAnnonce: React.FC = () => {
     const [annonce, setAnnonce] = useState(null as any);
     const [loading,setLoading] = useState(true);
-    const history = useHistory();
-    const { id } = useParams<{ id: string }>();
+    const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState<any>(null);
 
+    const history = useHistory();
+    const { id } = useParams<{ id: string }>();
     useEffect(() => {
         const getData = async () => {
           try {
@@ -60,7 +62,22 @@ const CarPost: React.FC = () => {
         history.goBack();  // Navigate to the previous page
     };
 
+    const handleDelete = async (event: React.MouseEvent) => {
+        event.preventDefault();
+        event.stopPropagation();
 
+        try {
+            setIsDeleting(true);
+            const responseMarque = await api.delete("/user/annonce/supprimer/"+id);
+
+            window.location.href = "mes-annonces";
+          } catch (error) {
+            console.error("Erreur", error);
+            setError(error);
+          } finally {
+            setIsDeleting(false);
+          }
+    };
 
     const slideOpts = {
         slidesPerView: 1,
@@ -75,7 +92,7 @@ const CarPost: React.FC = () => {
                 <IonButtons slot="start">
                     <IonBackButton text="" style={{ left: '10px' }} />
                 </IonButtons>
-                <IonTitle>Detail de la voiture</IonTitle>
+                <IonTitle className="ion-text-center">Detail de la voiture</IonTitle>
                 </IonToolbar>
             </IonHeader>
 
@@ -119,13 +136,21 @@ const CarPost: React.FC = () => {
                     </IonGrid>
                 </IonContent>
 
-                <IonFooter className="view-post-footer">
+                <IonFooter className="view-post-footer ion-padding">
                     <IonRow className="post-footer ion-align-self-center ion-justify-content-between">
                     <div className="ion-padding">
-                        <IonButton fill="clear" color="primary">
-                            <IonIcon icon={shareOutline} />
-                        </IonButton>
-
+                        {annonce.etat !== -10 &&  annonce.etat !== 10 && (
+                            <IonButton fill="clear" color="danger" size="small" onClick={handleDelete}>
+                                {isDeleting ? <IonSpinner name="lines" /> : <IonIcon icon={trashBin} />}
+                            </IonButton>
+                        )}
+                        {annonce.etat === 5 && (
+                            <Link to={`/vendre/${annonce.id}`} className="post-link">
+                                <IonButton fill="clear" color="primary" size="small">
+                                    Vendre
+                                </IonButton>
+                            </Link>
+                        )}
                     </div>
 
                     <div>
@@ -149,4 +174,4 @@ const CarPost: React.FC = () => {
     );
 };
 
-export default CarPost;
+export default DetailMonAnnonce;

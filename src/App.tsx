@@ -30,6 +30,11 @@ import Home from './pages/Home';
 import CarPost from './pages/CarPost';
 import { PushNotifications, PushNotification, PushNotificationActionPerformed, PushNotificationSchema, ActionPerformed } from '@capacitor/push-notifications';
 import { Toast } from '@capacitor/toast';
+import InsererAnnonce from './pages/InsererAnnonce';
+import MesAnnonces from './pages/MesAnnonces';
+import MesFavoris from './pages/MesFavoris';
+import DetailMonAnnonce from './pages/DetailMonAnnonce';
+import VendreAnnonce from './pages/VendreAnnonce';
 
 setupIonicReact();
 
@@ -58,8 +63,23 @@ const App: React.FC = () => {
             <Route path="/home" exact={true}>
               <Home />
             </Route>
+            <Route path="/mes-annonces" exact={true}>
+              <MesAnnonces />
+            </Route>
+            <Route path="/mes-favoris" exact={true}>
+              <MesFavoris />
+            </Route>
             <Route exact path="/annonce/:id">
               <CarPost />
+            </Route>
+            <Route exact path="/detail-mon-annonce/:id">
+              <DetailMonAnnonce />
+            </Route>
+            <Route exact path="/vendre/:id">
+              <VendreAnnonce />
+            </Route>
+            <Route path="/inserer_annonce" exact={true}>
+              <InsererAnnonce />
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>

@@ -30,20 +30,14 @@ const appPages: AppPage[] = [
     mdIcon: homeSharp
   },
   {
-    title: 'Publier une voiture',
-    url: '/publier-voiture',
+    title: 'Inserer une annonce',
+    url: '/inserer_annonce',
     iosIcon: addCircleOutline,
     mdIcon: addCircleSharp
   },
   {
-    title: 'Modifier les détails de la voiture',
-    url: '/modifier-voiture',
-    iosIcon: createOutline,
-    mdIcon: createSharp
-  },
-  {
-    title: 'Voitures disponibles',
-    url: '/voitures-disponibles',
+    title: 'Mes annonces',
+    url: '/mes-annonces',
     iosIcon: carOutline,
     mdIcon: carSharp
   },
@@ -53,42 +47,7 @@ const appPages: AppPage[] = [
     iosIcon: heartOutline,
     mdIcon: heartSharp
   },
-  {
-    title: 'Paramètres du compte',
-    url: '/parametres-compte',
-    iosIcon: settingsOutline,
-    mdIcon: settingsSharp
-  },
-  {
-    title: 'À propos',
-    url: '/a-propos',
-    iosIcon: helpCircleOutline,
-    mdIcon: documentTextOutline
-  },
-  {
-    title: 'Conditions générales',
-    url: '/conditions-generales',
-    iosIcon: documentOutline,
-    mdIcon: documentSharp
-  },
-  {
-    title: 'Service client',
-    url: '/service-client',
-    iosIcon: peopleOutline,
-    mdIcon: personOutline
-  },
-  {
-    title: 'Commentaires',
-    url: '/commentaires',
-    iosIcon: chatbubbleOutline,
-    mdIcon: chatbubbleSharp
-  },
-  {
-    title: 'Contactez-nous',
-    url: '/contactez-nous',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp
-  },
+ 
   {
     title: 'Se déconnecter',
     url: '/deconnexion',

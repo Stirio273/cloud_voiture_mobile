@@ -50,3 +50,33 @@
     border-radius: 10px 10px 0 0;
     /* Ajoutez une bordure arrondie uniquement en haut */
 }
+
+/* In your Post.css or another stylesheet file */
+.status-label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.status-deleted {
+    color: red; /* Customize color as needed */
+}
+
+.status-rejected {
+    color: orange; /* Customize color as needed */
+}
+
+.status-pending {
+    color: yellow; /* Customize color as needed */
+}
+
+.status-validated {
+    color: green; /* Customize color as needed */
+}
+
+.status-sold {
+    color: blue; /* Customize color as needed */
+}
+
+.status-unknown {
+    color: gray; /* Customize color as needed */
+}

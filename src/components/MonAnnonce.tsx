@@ -1,22 +1,44 @@
 // Post.tsx
 
 import React, { useState } from 'react';
-import { IonBadge, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonNote, IonRow } from "@ionic/react";
+import { IonBadge, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonNote, IonRow, IonText } from "@ionic/react";
 import { heartOutline, heartSharp,trashBin } from "ionicons/icons";
 import {AnnonceProps} from '../services/interface';
 import "../styles/Post.css";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Link } from 'react-router-dom';
+import api from "../services/api";
+import { IonSpinner } from "@ionic/react";
 
-const Post: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
+const MonAnnonce: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [error, setError] = useState<any>(null);
 
     const handleToggleFavorite = (event: React.MouseEvent) => {
         event.preventDefault();
         event.stopPropagation();
         setIsFavorite(!isFavorite);
     };
+
+    const handleDelete = async (event: React.MouseEvent,id: string) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        try {
+            setIsDeleting(true);
+            const responseMarque = await api.delete("/user/annonce/supprimer/"+id);
+            window.location.reload();
+
+          } catch (error) {
+            console.error("Erreur", error);
+            setError(error);
+          } finally {
+            setIsDeleting(false);
+          }
+    };
+    
 
     const renderStatusDetails = () => {
         let statusText = "";
@@ -58,7 +80,8 @@ const Post: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
     
 
     return (
-        <Link to={`/annonce/${annonce.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <>
+        <Link to={`/detail-mon-annonce/${annonce.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <IonCard className="post-card">
                 
                 <Carousel showArrows={false} showThumbs={false}>
@@ -69,7 +92,7 @@ const Post: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
                 ))}
                 </Carousel>
 
-                
+
                     <IonCardContent className="post-content">
                         <IonCardTitle className="post-title">
                             <span className="post-link">
@@ -96,6 +119,21 @@ const Post: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
                                 <IonButton fill="clear" color="primary" size="small" onClick={handleToggleFavorite}>
                                     <IonIcon icon={isFavorite ? heartSharp : heartOutline} />
                                 </IonButton>
+
+                                {annonce.etat !== -10 &&  annonce.etat !== 10 && (
+                                <IonButton fill="clear" color="primary" size="small" onClick={(e) => handleDelete(e, annonce.id)}>
+                                    {isDeleting ? <IonSpinner name="lines" /> : <IonIcon icon={trashBin} />}
+                                </IonButton>
+                                )}
+
+                                {annonce.etat === 5 && (
+                                    <Link to={`/vendre/${annonce.id}`} className="post-link">
+                                        <IonButton fill="clear" color="primary" size="small">
+                                            Vendre
+                                        </IonButton>
+                                    </Link>
+                                )}
+
                                 <IonButton fill="clear" color="primary" size="small">
                                     Detail
                                 </IonButton>
@@ -112,7 +150,15 @@ const Post: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
                 
             </IonCard>
         </Link>
+        {error && (
+        <div className="error-message">
+            <IonText color="danger">
+                <p>{error.message || "An error occurred."}</p>
+            </IonText>
+        </div>
+        )}
+        </>
     );
 }
 
-export default Post;
+export default MonAnnonce;
