@@ -128,7 +128,9 @@ const Login: React.FC = () => {
                 const authToken = response.data.token;
 
                 localStorage.setItem('authToken', authToken);
-                register();
+                // register();
+
+                window.location.href = "/home"
 
 
             } catch (error) {

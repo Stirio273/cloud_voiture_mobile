@@ -64,8 +64,7 @@ const Menu: React.FC = () => {
       <IonContent>
         <IonList id="inbox-list" className="custom-menu">
           <div className="user-name-background">
-            <IonListHeader className="menu-header">Rakoto Nirina</IonListHeader>
-            <IonNote className="menu-email">rnmdp@gmail.com</IonNote>
+            <IonListHeader className="menu-header">Milavam</IonListHeader>
           </div>
           {appPages.map((appPage, index) => {
             return (

@@ -150,7 +150,9 @@ const InsererAnnonce: React.FC = () => {
         </IonHeader>
         <IonContent className="ion-padding">
           {dataLoading ? (
-            <IonSpinner />
+            <div style={{textAlign:'center',marginTop:'10px'}}>
+              <IonSpinner />
+            </div>
           ) : (
           <IonList>
 
@@ -271,13 +273,15 @@ const InsererAnnonce: React.FC = () => {
           </IonList>
           )}
 
-          <IonButton className="custom-button" expand="block" onClick={handleSubmit} disabled={isLoading}>
+          {!dataLoading ? (
+            <IonButton className="custom-button" expand="block" onClick={handleSubmit} disabled={isLoading}>
               {isLoading ? (
-                  <IonSpinner name="crescent" color="light" />
+                <IonSpinner name="crescent" color="light" />
               ) : (
-                  'Valider'
+                'Valider'
               )}
-          </IonButton>
+            </IonButton>
+          ) : null}
 
         </IonContent>
       </IonPage>

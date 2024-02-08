@@ -110,20 +110,22 @@ const Home: React.FC = () => {
         />
       </IonRefresher>
 
-      <CarFilterBar />
-      <IonHeader collapse="condense">
-        <IonToolbar>
-          <IonTitle size="large" className="medium-title">
-            Ventes de Voitures
-          </IonTitle>
-          <IonText color="medium">Tirez vers le bas pour rafraîchir</IonText>
-        </IonToolbar>
-      </IonHeader>
-
-      {loading && <IonSpinner name="crescent" color="light" />}
+      {loading && 
+        <div style={{textAlign:'center',marginTop:'10px'}}>
+          <IonSpinner />
+        </div>
+      }
       {!loading && (
+
         <IonContent>
-        
+
+          <IonToolbar>
+            <IonTitle size="large">
+              Accueil
+            </IonTitle>
+            <IonText style={{'margin-left':'20px'}} color="medium">Tirez vers le bas pour rafraîchir</IonText>
+          </IonToolbar>
+
           <IonGrid>
             <IonRow>
               {visibleAnnonces.map((annonce, index) => (

@@ -21,11 +21,6 @@ const Layout: React.FC<LayoutProps> = ({ pageTitle, children }) => {
                         <IonIcon icon={carOutline} className="car-icon" />
                         {pageTitle}
                     </IonTitle>
-                    <IonButtons slot="end">
-                        <IonButton routerLink="/notifications" className="notification-button">
-                            <IonIcon icon={notificationsOutline} className="car-icon" />
-                        </IonButton>
-                    </IonButtons>
                 </IonToolbar>
             </IonHeader>
 
