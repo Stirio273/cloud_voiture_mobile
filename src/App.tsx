@@ -35,6 +35,7 @@ import MesAnnonces from './pages/MesAnnonces';
 import MesFavoris from './pages/MesFavoris';
 import DetailMonAnnonce from './pages/DetailMonAnnonce';
 import VendreAnnonce from './pages/VendreAnnonce';
+import Logout from './pages/Logut';
 
 setupIonicReact();
 
@@ -80,6 +81,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/inserer_annonce" exact={true}>
               <InsererAnnonce />
+            </Route>
+            <Route path="/deconnexion" exact={true}>
+              <Logout/>
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>

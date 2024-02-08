@@ -24,7 +24,7 @@ const Login: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
+    const register = () => {
         // Register for push notifications
         PushNotifications.checkPermissions().then(result => {
             if (result.receive == 'granted') {
@@ -34,7 +34,8 @@ const Login: React.FC = () => {
                 PushNotifications.addListener('registration', (token) => {
                     console.log('Token ' + token.value);
                     const deviceToken = token.value;
-                    //sendTokenToServer(deviceToken);
+                    showToast(deviceToken);
+                    sendTokenToServer(deviceToken);
                 });
 
                 // Some issue with our setup and push will not work
@@ -55,19 +56,25 @@ const Login: React.FC = () => {
                 });
             }
         });
-    }, []);
+    };
 
     const sendTokenToServer = async (deviceToken: string) => {
         try {
-            const response = await fetch('http://192.168.21.172:8080/registerDeviceToken/1', {
-                method: 'POST',
+            // const response = await fetch('http://192.168.21.172:8080/registerDeviceToken/1', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({ deviceToken }),
+            // });
+            const response = await api.post('/registerDeviceToken', deviceToken, {
                 headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ deviceToken }),
+                    'Content-Type': 'text/plain'
+                }
             });
+            window.location.href = '/home';
 
-            if (response.ok) {
+            if (response.status) {
                 console.log('Device token sent successfully');
             } else {
                 console.error('Failed to send device token to the server');
@@ -107,7 +114,7 @@ const Login: React.FC = () => {
         setErrors(formErrors);
 
         if (!formErrors.length) {
-            const formData :  LoginFormData = {};
+            const formData: LoginFormData = {};
             fields.forEach(field => {
                 formData[field.id] = field.input.state.value;
                 // console.log(formData[field.id]);
@@ -121,9 +128,9 @@ const Login: React.FC = () => {
                 const authToken = response.data.token;
 
                 localStorage.setItem('authToken', authToken);
-                window.location.href = '/home';
+                register();
 
-                
+
             } catch (error) {
                 showToast('Error during login');
             } finally {

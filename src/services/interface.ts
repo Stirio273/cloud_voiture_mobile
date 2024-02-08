@@ -56,7 +56,8 @@ export interface AnnonceProps{
         photo:Photo[],
         etat:number
     },
-    afficherStatus:boolean
+    afficherStatus:boolean,
+    isFavorite:boolean
     
 }
 

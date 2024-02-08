@@ -14,6 +14,8 @@ import {
   IonButton,
   IonIcon,
   IonText,
+  IonRefresher,
+  IonRefresherContent,
 } from "@ionic/react";
 import Layout from "../components/Layout";
 import Post from "../components/Post";
@@ -29,24 +31,26 @@ const Home: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterBy, setFilterBy] = useState(""); // Ajouter le filtre par défaut
   const [sortBy, setSortBy] = useState(""); // Ajouter le tri par défaut
-  const [annonces, setAnnonces] = useState([]);
+  const [annonces, setAnnonces] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
+  const [annonceFavoris,setAnnonceFavoris] = useState<any[]>([]);
+
+  const getData = async () => {
+    try {
+      const responseMarque = await api.get("/user/annonce/accueil");
+      const annonceFavoris = await api.get("/user/annonce/favoris");
+      setAnnonces(responseMarque.data.data);
+      setAnnonceFavoris(annonceFavoris.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Erreur", error);
+      setLoading(false);
+      setError(error);
+    }
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const responseMarque = await api.get("/user/annonce/accueil");
-        console.log(responseMarque.data.data);
-        setAnnonces(responseMarque.data.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Erreur", error);
-        setLoading(false);
-        setError(error);
-      }
-    };
-
     getData();
   }, []);
 
@@ -83,28 +87,48 @@ const Home: React.FC = () => {
     return pages;
   };
 
-  const visibleAnnonces = annonces;
+  const visibleAnnonces = annonces.map((annonce) => ({
+    ...annonce,
+    isFavorite: annonceFavoris.some((favAnnonce) => favAnnonce.id === annonce.id),
+  }));
+
+  const handleRefresh = async (event: CustomEvent) => {
+    try {
+      await getData();
+    } finally {
+      event.detail.complete();
+    }
+  };
 
   return (
     <Layout pageTitle="MilaVam">
+
+      <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+        <IonRefresherContent
+          pullingText="Pull to refresh"
+          refreshingText="Refreshing..."
+        />
+      </IonRefresher>
+
+      <CarFilterBar />
       <IonHeader collapse="condense">
         <IonToolbar>
           <IonTitle size="large" className="medium-title">
             Ventes de Voitures
           </IonTitle>
+          <IonText color="medium">Tirez vers le bas pour rafraîchir</IonText>
         </IonToolbar>
       </IonHeader>
 
       {loading && <IonSpinner name="crescent" color="light" />}
       {!loading && (
         <IonContent>
-          <CarFilterBar />
-
+        
           <IonGrid>
             <IonRow>
               {visibleAnnonces.map((annonce, index) => (
                 <IonCol size="12" size-md="6" key={`carPost_${index}`}>
-                  <Post annonce={annonce} key={`carPost_${index}`}  afficherStatus={false}/>
+                  <Post annonce={annonce} key={`carPost_${index}`}  afficherStatus={false} isFavorite={annonce.isFavorite}/>
                 </IonCol>
               ))}
             </IonRow>

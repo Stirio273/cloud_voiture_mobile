@@ -11,15 +11,23 @@ import { Link } from 'react-router-dom';
 import api from "../services/api";
 import { IonSpinner } from "@ionic/react";
 
-const MonAnnonce: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
+const MonAnnonce: React.FC<AnnonceProps> = ({ annonce,afficherStatus,isFavorite }) => {
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState<any>(null);
 
-    const handleToggleFavorite = (event: React.MouseEvent) => {
+    const [estFavorisSt,setEstFavorisSt] = useState(isFavorite);
+
+    const handleToggleFavorite = async (event: React.MouseEvent,idannonce:string) => {
         event.preventDefault();
         event.stopPropagation();
-        setIsFavorite(!isFavorite);
+
+        if(estFavorisSt == true){
+            const resp = await api.delete("/user/annonce/favoris/supprimer/"+idannonce);
+        } else {
+            const resp = await api.post("/user/annonce/favoris/ajouter/"+idannonce);
+        }
+
+        setEstFavorisSt(!estFavorisSt);
     };
 
     const handleDelete = async (event: React.MouseEvent,id: string) => {
@@ -116,8 +124,8 @@ const MonAnnonce: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
 
                         <IonRow className="post-footer ion-align-self-center ion-justify-content-between">
                             <div>
-                                <IonButton fill="clear" color="primary" size="small" onClick={handleToggleFavorite}>
-                                    <IonIcon icon={isFavorite ? heartSharp : heartOutline} />
+                                <IonButton fill="clear" color="primary" size="small" onClick={(e) => handleToggleFavorite(e,annonce.id)}>
+                                    <IonIcon icon={estFavorisSt ? heartSharp : heartOutline} />
                                 </IonButton>
 
                                 {annonce.etat !== -10 &&  annonce.etat !== 10 && (

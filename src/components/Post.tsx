@@ -8,14 +8,23 @@ import "../styles/Post.css";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Link } from 'react-router-dom';
+import api from "../services/api";
 
-const Post: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
+const Post: React.FC<AnnonceProps> = ({ annonce,afficherStatus,isFavorite }) => {
 
-    const handleToggleFavorite = (event: React.MouseEvent) => {
+    const [estFavorisSt,setEstFavorisSt] = useState(isFavorite);
+
+    const handleToggleFavorite = async (event: React.MouseEvent,idannonce:string) => {
         event.preventDefault();
         event.stopPropagation();
-        setIsFavorite(!isFavorite);
+
+        if(estFavorisSt == true){
+            const resp = await api.delete("/user/annonce/favoris/supprimer/"+idannonce);
+        } else {
+            const resp = await api.post("/user/annonce/favoris/ajouter/"+idannonce);
+        }
+
+        setEstFavorisSt(!estFavorisSt);
     };
 
     const renderStatusDetails = () => {
@@ -93,8 +102,8 @@ const Post: React.FC<AnnonceProps> = ({ annonce,afficherStatus }) => {
 
                         <IonRow className="post-footer ion-align-self-center ion-justify-content-between">
                             <div>
-                                <IonButton fill="clear" color="primary" size="small" onClick={handleToggleFavorite}>
-                                    <IonIcon icon={isFavorite ? heartSharp : heartOutline} />
+                                <IonButton fill="clear" color="primary" size="small" onClick={(e) => handleToggleFavorite(e,annonce.id)}>
+                                    <IonIcon icon={estFavorisSt ? heartSharp : heartOutline} />
                                 </IonButton>
                                 <IonButton fill="clear" color="primary" size="small">
                                     Detail

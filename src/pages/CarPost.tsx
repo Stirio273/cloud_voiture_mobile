@@ -121,18 +121,18 @@ const CarPost: React.FC = () => {
 
                 <IonFooter className="view-post-footer">
                     <IonRow className="post-footer ion-align-self-center ion-justify-content-between">
-                    <div className="ion-padding">
-                        <IonButton fill="clear" color="primary">
-                            <IonIcon icon={shareOutline} />
-                        </IonButton>
+                        <div className="ion-padding">
+                            <IonButton fill="clear" color="primary">
+                                <IonIcon icon={shareOutline} />
+                            </IonButton>
 
-                    </div>
+                        </div>
 
-                    <div>
-                        <IonBadge color="primary" className="post-category">
-                        {annonce?.categorie.libelle}
-                        </IonBadge>
-                    </div>
+                        <div>
+                            <IonBadge color="primary" className="post-category">
+                            {annonce?.categorie.libelle}
+                            </IonBadge>
+                        </div>
                     </IonRow>
                 </IonFooter>
                 </>
