@@ -1,12 +1,18 @@
 import React, { useEffect } from 'react';
 import { IonContent, IonPage } from '@ionic/react';
+import api from '../services/api';
 
-const Logout : React.FC = () => {
+const Logout: React.FC = () => {
   useEffect(() => {
-    logout();    
+    logout();
   }, []);
 
-  const logout = () => {
+  const logout = async () => {
+    await api.post('/unregisterDeviceToken', localStorage.getItem('deviceToken'), {
+      headers: {
+        'Content-Type': 'text/plain'
+      }
+    });
     localStorage.removeItem('authToken');
     window.location.href = '/signin';
   };

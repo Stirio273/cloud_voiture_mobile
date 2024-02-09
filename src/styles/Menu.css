@@ -1,15 +1,5 @@
 /* Ajoutez ces styles dans votre fichier Menu.css */
 
-.user-name-background {
-  background-color: #003366;
-  /* This is a shade of dark blue */
-  padding: 10px;
-  /* Adjust this value to your liking */
-  border-radius: 5px;
-  /* Adjust this value to your liking */
-  color: white;
-  /* Change the text color to white */
-}
 
 ion-menu ion-content {
   --background: #051622;

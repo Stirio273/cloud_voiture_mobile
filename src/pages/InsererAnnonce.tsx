@@ -36,11 +36,11 @@ const InsererAnnonce: React.FC = () => {
   const [selectedNomVoiture, setSelectedNomVoiture] = useState<string>("");
 
   const [isLoading, setIsLoading] = useState(false);
-  const [dataLoading,setDataLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(true);
 
   const showToast = async (msg: string) => {
     await Toast.show({
-        text: msg
+      text: msg
     })
   }
 
@@ -61,7 +61,7 @@ const InsererAnnonce: React.FC = () => {
         console.error("Erreur", error);
         setDataLoading(false);
         showToast('Error during login');
-      } 
+      }
     };
 
     getData();
@@ -141,19 +141,13 @@ const InsererAnnonce: React.FC = () => {
   };
 
   return (
-    <Layout pageTitle='inserer annonce'>
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Inserer annonce</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent className="ion-padding">
-          {dataLoading ? (
-            <div style={{textAlign:'center',marginTop:'10px'}}>
-              <IonSpinner />
-            </div>
-          ) : (
+    <Layout pageTitle='Inserer annonce'>
+      <IonContent className="ion-padding">
+        {dataLoading ? (
+          <div style={{ textAlign: 'center', marginTop: '10px' }}>
+            <IonSpinner />
+          </div>
+        ) : (
           <IonList>
 
             <IonItem>
@@ -267,24 +261,23 @@ const InsererAnnonce: React.FC = () => {
               <IonLabel className="ion-text-white" position="stacked">
                 Photos
               </IonLabel>
-              <input type="file" name="photos" onChange={(ev) => handleFileChange(ev)} multiple/>
+              <input type="file" name="photos" onChange={(ev) => handleFileChange(ev)} multiple />
             </IonItem>
 
           </IonList>
-          )}
+        )}
 
-          {!dataLoading ? (
-            <IonButton className="custom-button" expand="block" onClick={handleSubmit} disabled={isLoading}>
-              {isLoading ? (
-                <IonSpinner name="crescent" color="light" />
-              ) : (
-                'Valider'
-              )}
-            </IonButton>
-          ) : null}
+        {!dataLoading ? (
+          <IonButton className="custom-button" expand="block" onClick={handleSubmit} disabled={isLoading}>
+            {isLoading ? (
+              <IonSpinner name="crescent" color="light" />
+            ) : (
+              'Valider'
+            )}
+          </IonButton>
+        ) : null}
 
-        </IonContent>
-      </IonPage>
+      </IonContent>
     </Layout>
   );
 };

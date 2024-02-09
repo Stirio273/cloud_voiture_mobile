@@ -1,6 +1,8 @@
 import React from 'react';
 import {
+  IonButton,
   IonContent,
+  IonHeader,
   IonIcon,
   IonItem,
   IonLabel,
@@ -9,10 +11,12 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { homeOutline, homeSharp, carOutline, carSharp, addCircleOutline, addCircleSharp, createOutline, createSharp, logOutOutline, logOutSharp, chatbubbleOutline, chatbubbleSharp, documentOutline, documentSharp, heartOutline, heartSharp, mailOutline, mailSharp, settingsOutline, settingsSharp, helpCircleOutline, documentTextOutline, peopleOutline, personOutline } from 'ionicons/icons';
+import { homeOutline, homeSharp, carOutline, carSharp, addCircleOutline, addCircleSharp, createOutline, createSharp, logOutOutline, logOutSharp, chatbubbleOutline, chatbubbleSharp, documentOutline, documentSharp, heartOutline, heartSharp, mailOutline, mailSharp, settingsOutline, settingsSharp, helpCircleOutline, documentTextOutline, peopleOutline, personOutline, menuOutline } from 'ionicons/icons';
 import '../styles/Menu.css';
 
 interface AppPage {
@@ -47,7 +51,7 @@ const appPages: AppPage[] = [
     iosIcon: heartOutline,
     mdIcon: heartSharp
   },
- 
+
   {
     title: 'Se déconnecter',
     url: '/deconnexion',
@@ -60,21 +64,21 @@ const Menu: React.FC = () => {
   const location = useLocation();
 
   return (
+
     <IonMenu contentId="main" type="overlay">
       <IonContent>
-        <IonList id="inbox-list" className="custom-menu">
-          <div className="user-name-background">
-            <IonListHeader className="menu-header">Milavam</IonListHeader>
-          </div>
+        <IonList>
+          <IonHeader translucent>
+            <IonToolbar>
+              <IonTitle>MilaVam</IonTitle>
+            </IonToolbar>
+          </IonHeader>
           {appPages.map((appPage, index) => {
             return (
-              <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
-                  <IonIcon aria-hidden="true" slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
-                  <IonLabel>{appPage.title}</IonLabel>
-                </IonItem>
-              </IonMenuToggle>
-            );
+              <IonItem key={index} className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
+                <IonIcon aria-hidden="true" slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
+                <IonLabel>{appPage.title}</IonLabel>
+              </IonItem>)
           })}
         </IonList>
       </IonContent>

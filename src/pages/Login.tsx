@@ -34,7 +34,8 @@ const Login: React.FC = () => {
                 PushNotifications.addListener('registration', (token) => {
                     console.log('Token ' + token.value);
                     const deviceToken = token.value;
-                    showToast(deviceToken);
+                    localStorage.setItem('deviceToken', deviceToken);
+                    //showToast(deviceToken);
                     sendTokenToServer(deviceToken);
                 });
 
@@ -128,9 +129,9 @@ const Login: React.FC = () => {
                 const authToken = response.data.token;
 
                 localStorage.setItem('authToken', authToken);
-                // register();
+                register();
 
-                window.location.href = "/home"
+                //window.location.href = "/home"
 
 
             } catch (error) {

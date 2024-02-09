@@ -1,10 +1,24 @@
 /* CarPost.css */
 
-.view-post-footer {
-    padding: 1rem;
-    border-top: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
+ion-card {
+    margin-inline: initial;
+    background: rgb(241, 241, 241);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 8px;
+}
+
+ion-card .bordered {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin: 0 5%;
+    width: 90%;
+}
+
+ion-card-content ion-row {
+    margin-top: 10px;
+}
+
+.infoValue {
+    font-weight: bold;
+    text-align: right;
 }
 
 .view-post-footer div {
